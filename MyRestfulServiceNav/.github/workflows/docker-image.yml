@@ -21,10 +21,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker Image
-        run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/java-rest-api:latest \
-          -f MyRestfulServiceNav/Dockerfile \
-          MyRestfulServiceNav
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/java-rest-api:latest -f MyRestfulServiceNav/Dockerfile MyRestfulServiceNav
 
       - name: Push Docker Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/java-rest-api:latest
