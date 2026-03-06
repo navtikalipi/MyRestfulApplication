@@ -1,0 +1,96 @@
+<div class="laptop-container">
+  <h1>Laptop Management</h1>
+
+  <!-- Add Laptop Section -->
+  <div class="section">
+    <h2>Add New Laptop</h2>
+    <form (ngSubmit)="addLaptop()">
+      <input type="text" [(ngModel)]="newLaptop.name" name="name" placeholder="Name" required>
+      <input type="text" [(ngModel)]="newLaptop.brand" name="brand" placeholder="Brand" required>
+      <input type="number" [(ngModel)]="newLaptop.price" name="price" placeholder="Price" required>
+      <input type="text" [(ngModel)]="newLaptop.ram" name="ram" placeholder="RAM">
+      <button type="submit">Add Laptop</button>
+    </form>
+  </div>
+
+  <!-- List All Laptops Section -->
+  <div class="section">
+    <h2>All Laptops</h2>
+    <button (click)="getAllLaptops()">Refresh List</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Price</th>
+          <th>Specification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let laptop of laptops; let i = index">
+          <td>{{ i }}</td>
+          <td>{{ laptop.brand }}</td>
+          <td>{{ laptop.model }}</td>
+          <td>{{ laptop.price }}</td>
+          <td>{{ laptop.specification }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Delete Laptop</h2>
+    <input type="number" [(ngModel)]="deleteIndex" placeholder="Enter Index to Delete">
+    <button (click)="deleteLaptop()">Delete</button>
+  </div>
+
+  <div class="section">
+    <h2>Update Laptop</h2>
+    <input type="number" [(ngModel)]="updateIndex" placeholder="Enter Index to Update">
+    <form (ngSubmit)="updateLaptopByIndex()">
+      <input type="text" [(ngModel)]="updateLaptop.name" name="updateName" placeholder="New Name">
+      <input type="text" [(ngModel)]="updateLaptop.brand" name="updateBrand" placeholder="New Brand">
+      <input type="number" [(ngModel)]="updateLaptop.price" name="updatePrice" placeholder="New Price">
+      <input type="text" [(ngModel)]="updateLaptop.ram" name="updateRam" placeholder="New RAM">
+      <button type="submit">Update</button>
+    </form>
+  </div>
+
+  <div class="section">
+    <h2>Find Laptop by Index</h2>
+    <input type="number" [(ngModel)]="findIndex" placeholder="Enter Index">
+    <button (click)="findByIndex()">Find</button>
+    <div *ngIf="foundLaptop">
+      <p>Brand: {{ foundLaptop.brand }}</p>
+      <p>Model: {{ foundLaptop.model }}</p>
+      <p>Price: {{ foundLaptop.price }}</p>
+      <p>Specification: {{ foundLaptop.specification }}</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Find Laptops by Brand</h2>
+    <input type="text" [(ngModel)]="searchBrand" placeholder="Enter Brand Name">
+    <button (click)="findByBrand()">Search</button>
+    <button (click)="clearSearch()">Clear</button>
+    <table *ngIf="searchResult.length > 0">
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Price</th>
+          <th>Specification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let laptop of searchResult">
+          <td>{{ laptop.brand }}</td>
+          <td>{{ laptop.model }}</td>
+          <td>{{ laptop.price }}</td>
+          <td>{{ laptop.specification }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<html>
+    <body>
+        <div style="text-align: center; padding: 20px; font-family: Arial, sans-serif; background-color: #f5e6d3; min-height: 100vh;">
+            
+            <h1 style="color: #8B4513;">Welcome to Chai Shop</h1>
+            <p style="color: #654321;">Best Tea in Town!</p>
+            
+            <div style="margin: 20px auto; max-width: 400px;">
+                <h2 style="color: #8B4513;">Our Menu</h2>
+                
+                <app-masala-chai></app-masala-chai>
+                <app-plain-chai></app-plain-chai>
+                <app-elaichi-chai></app-elaichi-chai>
+                <app-ginger-chai></app-ginger-chai>
+            </div>
+            
+            <div style="margin: 30px;">
+                <h2 style="color: #8B4513;">Order Here</h2>
+                <input type="text" id="customerName" placeholder="Enter your name" style="padding: 10px; margin: 5px; border-radius: 5px;">
+                <br>
+                <select id="chaiSelection" style="padding: 10px; margin: 5px; border-radius: 5px;">
+                    <option value="">Select your chai</option>
+                    <option value="Masala Chai">Masala Chai - ₹20</option>
+                    <option value="Plain Chai">Plain Chai - ₹15</option>
+                    <option value="Elaichi Chai">Elaichi Chai - ₹25</option>
+                    <option value="Ginger Chai">Ginger Chai - ₹25</option>
+                </select>
+                <br>
+                <button onclick="orderChai()" style="background: #8B4513; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 10px;">
+                    Order Now!
+                </button>
+            </div>
+
+            <div id="thankYouMessage" style="display: none; background: white; padding: 20px; margin: 20px auto; max-width: 400px; border-radius: 10px; box-shadow: 2px 2px 5px gray;">
+                <h3 style="color: #228B22;">Thank You!</h3>
+                <p id="orderDetails"></p>
+                <p style="color: #654321;">Your chai will be ready soon!</p>
+            </div>
+
+            <footer style="margin-top: 30px; color: #654321;">
+                <p>Location: Chai Shop, Main Road</p>
+                <p>Call: Call us: 9123456789</p>
+                <p>Thank you for visiting!</p>
+            </footer>
+        </div>
+
+        <script>
+            function orderChai() {
+                var name = document.getElementById('customerName').value;
+                var chai = document.getElementById('chaiSelection').value;
+                var messageDiv = document.getElementById('thankYouMessage');
+                var orderDetails = document.getElementById('orderDetails');
+
+                if (name === '' || chai === '') {
+                    alert('Please enter your name and select a chai!');
+                    return;
+                }
+
+                orderDetails.innerHTML = 'Hello <b>' + name + '</b>!<br>You bought <b>' + chai + '</b>';
+                messageDiv.style.display = 'block';
+            }
+        </script>
+    </body>
+</html>
