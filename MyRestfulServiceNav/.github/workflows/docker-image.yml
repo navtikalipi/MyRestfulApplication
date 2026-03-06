@@ -10,17 +10,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: MyRestfulServiceNav
-
     steps:
-
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Show files
-        run: ls -la
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -29,7 +21,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker Image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/java-rest-api:latest .
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/java-rest-api:latest \
+          -f MyRestfulServiceNav/Dockerfile \
+          MyRestfulServiceNav
 
       - name: Push Docker Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/java-rest-api:latest
